@@ -12,7 +12,11 @@ app.get("/", (req, res) => {
 const io = new Server(server);
 
 io.on("connection", (socket) => {
-  console.log(socket.id);
+  console.log(`New client connected: ${socket.id}`);
+
+  socket.on("emoji", (data) => {
+    socket.broadcast.emit("new_emoji", data);
+  });
 });
 
 server.listen(8000, () => {
