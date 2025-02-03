@@ -1,5 +1,10 @@
-import { Button, Card } from "@heroui/react";
 import { useState } from "react";
+import { Button, Card } from "@heroui/react";
+import { io } from "socket.io-client";
+
+const server = io(
+  "https://refactored-rotary-phone-5g4x69w5vxrvh4p96-8000.app.github.dev/"
+);
 
 function Emoji() {
   const [emoji, setEmoji] = useState("😎");
@@ -24,6 +29,7 @@ function EmojiSelect({ onClick }) {
     <div className="flex gap-1 flex-wrap justify-center">
       {emojiOptions.map((emoji) => (
         <Button
+          key={emoji}
           className="text-2xl"
           variant="faded"
           onPress={() => onClick(emoji)}
