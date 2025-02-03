@@ -9,7 +9,11 @@ app.get("/", (req, res) => {
   res.send("Server is up and running!");
 });
 
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+  },
+});
 
 io.on("connection", (socket) => {
   console.log(`New client connected: ${socket.id}`);
