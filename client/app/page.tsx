@@ -1,11 +1,15 @@
 "use client";
 import { HeroUIProvider } from "@heroui/react";
-import Emoji from "@/components/Emoji";
+import { Messages, Inputs, SignUp } from "@/components";
 
 export default function Home() {
   return (
     <HeroUIProvider>
-      <Emoji />
+      <div className="min-h-screen max-h-screen">
+        {/* <Messages />
+      <Inputs /> */}
+        <SignUp />
+      </div>
     </HeroUIProvider>
   );
 }
