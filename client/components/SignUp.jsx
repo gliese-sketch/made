@@ -11,7 +11,7 @@ import {
   Button,
 } from "@heroui/react";
 
-function SignUp({ setUser }) {
+function SignUp({ setUser, socket }) {
   const onSubmit = (e) => {
     // Prevent default browser page refresh.
     e.preventDefault();
@@ -19,10 +19,9 @@ function SignUp({ setUser }) {
     // Get form data as an object.
     const data = Object.fromEntries(new FormData(e.currentTarget));
 
-    console.log(data);
-
-    // TODO: Emit this to our server.
+    // Emit this to our server.
     setUser(data);
+    socket.emit("new_user", data);
   };
 
   return (
