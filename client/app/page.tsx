@@ -21,7 +21,7 @@ export default function Home() {
     <HeroUIProvider>
       <div className="min-h-screen max-h-screen">
         {user ? (
-          <div className="bg-green-100 min-h-screen">
+          <div className="bg-violet-200 min-h-screen">
             <div className="container mx-auto relative min-h-screen p-4">
               <Messages />
               <Inputs />
