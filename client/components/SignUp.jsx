@@ -17,7 +17,7 @@ function SignUp() {
             alt="made logo"
             height={40}
             radius="sm"
-            src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+            src="favicon.ico"
             width={40}
           />
           <div className="flex flex-col">
