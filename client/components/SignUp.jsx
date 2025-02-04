@@ -6,9 +6,24 @@ import {
   Divider,
   Link,
   Image,
+  Form,
+  Input,
+  Button,
 } from "@heroui/react";
 
 function SignUp() {
+  const onSubmit = (e) => {
+    // Prevent default browser page refresh.
+    e.preventDefault();
+
+    // Get form data as an object.
+    const data = Object.fromEntries(new FormData(e.currentTarget));
+
+    console.log(data);
+
+    // TODO: Submit data to your backend API.
+  };
+
   return (
     <div className="flex items-center justify-center  bg-blue-200 min-h-screen">
       <Card className="max-w-[400px]">
@@ -29,7 +44,18 @@ function SignUp() {
         <Divider />
 
         <CardBody>
-          <p>Make beautiful websites regardless of your design experience.</p>
+          <Form onSubmit={onSubmit} validationBehavior="native">
+            <Input
+              isRequired
+              errorMessage="Please enter a valid name"
+              label="Name"
+              labelPlacement="outside"
+              name="name"
+              placeholder="Enter your name"
+              type="text"
+            />
+            <Button type="submit">Enter</Button>
+          </Form>
         </CardBody>
 
         <Divider />
