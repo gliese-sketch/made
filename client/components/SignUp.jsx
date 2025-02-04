@@ -11,7 +11,7 @@ import {
   Button,
 } from "@heroui/react";
 
-function SignUp() {
+function SignUp({ setUser }) {
   const onSubmit = (e) => {
     // Prevent default browser page refresh.
     e.preventDefault();
@@ -21,7 +21,8 @@ function SignUp() {
 
     console.log(data);
 
-    // TODO: Submit data to your backend API.
+    // TODO: Emit this to our server.
+    setUser(data);
   };
 
   return (
@@ -53,6 +54,7 @@ function SignUp() {
               name="name"
               placeholder="Enter your name"
               type="text"
+              autoComplete="off"
             />
             <Button type="submit">Enter</Button>
           </Form>
