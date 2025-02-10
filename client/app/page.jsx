@@ -13,8 +13,8 @@ export default function Home() {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    socket.on("user_joined", (data) => {
-      console.log(data);
+    socket.on("new_message", (msg) => {
+      setMessages((prevState) => [...prevState, msg]);
     });
   }, []);
 
