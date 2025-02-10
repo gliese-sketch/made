@@ -27,9 +27,6 @@ function Inputs() {
       if (file) {
         reader.readAsDataURL(file); // Converts image to base64 URI
       }
-
-      // const url = URL.createObjectURL(file);
-      // console.log(url);
     }
   };
 
