@@ -1,4 +1,4 @@
-import { Card, CardBody, Avatar } from "@heroui/react";
+import { Card, CardBody, Avatar, Image } from "@heroui/react";
 
 function Chat({ message, self }) {
   return (
@@ -10,21 +10,32 @@ function Chat({ message, self }) {
         }`}
       >
         <CardBody className="flex flex-row items-center gap-1">
+          {/* Show Avatar */}
           {!self && <Avatar name={message.user.name.toUpperCase()} />}
-          <p>
-            {message.type === "link" ? (
-              <a
-                href={message.content}
-                target="_blank"
-                className="underline"
-                rel="noopener noreferrer nofollow"
-              >
-                {message.content}
-              </a>
-            ) : (
-              message.content
-            )}
-          </p>
+
+          {/* Image */}
+          {message.type === "image" && (
+            <Image alt="Image message" src={message.content} width={400} />
+          )}
+
+          {/* Render text or link */}
+          {message.type === "link" ||
+            (message.type === "text" && (
+              <p>
+                {message.type === "link" ? (
+                  <a
+                    href={message.content}
+                    target="_blank"
+                    className="underline"
+                    rel="noopener noreferrer nofollow"
+                  >
+                    {message.content}
+                  </a>
+                ) : (
+                  message.content
+                )}
+              </p>
+            ))}
         </CardBody>
       </Card>
     </div>
