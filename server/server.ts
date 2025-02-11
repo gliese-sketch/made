@@ -23,8 +23,8 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log(`New client connected: ${socket.id}`);
 
-  socket.on("user", (data) => {
-    socket.broadcast.emit("new_user", data);
+  socket.on("user", (name) => {
+    socket.broadcast.emit("new_user", name);
   });
 
   socket.on("message", async (data) => {

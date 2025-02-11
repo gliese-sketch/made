@@ -18,6 +18,15 @@ export default function Home() {
     });
   }, []);
 
+  useEffect(() => {
+    socket.on("new_user", (name) => {
+      setMessages((prevState) => [
+        ...prevState,
+        { type: "user", content: name },
+      ]);
+    });
+  }, []);
+
   return (
     <HeroUIProvider>
       <div className="min-h-screen max-h-screen bg-gradient-to-r from-[#fbed96] to-[#abecd6]">

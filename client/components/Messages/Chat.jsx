@@ -13,29 +13,33 @@ function Chat({ message, self }) {
           {/* Show Avatar */}
           {!self && <Avatar name={message.user.name.toUpperCase()} />}
 
-          {/* Image */}
+          {/* For image */}
           {message.type === "image" && (
             <Image alt="Image message" src={message.content} width={400} />
           )}
 
-          {/* Render text or link */}
-          {message.type === "link" ||
-            (message.type === "text" && (
-              <p>
-                {message.type === "link" ? (
-                  <a
-                    href={message.content}
-                    target="_blank"
-                    className="underline"
-                    rel="noopener noreferrer nofollow"
-                  >
-                    {message.content}
-                  </a>
-                ) : (
-                  message.content
-                )}
-              </p>
-            ))}
+          {/* For text */}
+          {message.type === "text" && <p>{message.content}</p>}
+
+          {/* For ai */}
+          {message.type === "ai" && (
+            <p className="bg-gradient-to-r from-[#A1FFCE] to-[#FAFFD1]">
+              {message.content}
+            </p>
+          )}
+
+          {/* For links */}
+          {message.type === "link" && (
+            <p>
+              <a
+                href={message.content}
+                className="underline"
+                rel="noopener noreferrer nofollow"
+              >
+                {message.content}
+              </a>
+            </p>
+          )}
         </CardBody>
       </Card>
     </div>
