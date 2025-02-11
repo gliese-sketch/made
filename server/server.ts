@@ -40,11 +40,13 @@ io.on("connection", (socket) => {
       };
 
       const response = await axios.post(URL, query, options);
-      const newMessage = { ...data, content: response };
+      const newMessage = {
+        ...data,
+        type: "ai",
+        content: response.data.res.response,
+      };
 
-      console.log(response.data.res.response);
-
-      socket.broadcast.emit("new_message", newMessage);
+      io.emit("new_message", newMessage);
     }
     {
       socket.broadcast.emit("new_message", data);

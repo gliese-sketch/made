@@ -1,7 +1,11 @@
-import React from "react";
+import { UserRoundPlusIcon } from "lucide-react";
 
-function NewUser() {
-  return <div>NewUser</div>;
+function NewUser({ name }) {
+  return (
+    <div>
+      {UserRoundPlusIcon} {name} just joined
+    </div>
+  );
 }
 
 export default NewUser;
