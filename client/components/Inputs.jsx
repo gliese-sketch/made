@@ -2,13 +2,12 @@ import React, { useRef, useState } from "react";
 import { Button, Input } from "@heroui/react";
 import { SendHorizontalIcon, UploadIcon } from "lucide-react";
 
-function Inputs({ socket, id, name, setMessages }) {
+function Inputs({ socket, name, setMessages }) {
   const [input, setInput] = useState("");
   const inputUpload = useRef(null);
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
-    console.log(file);
 
     const reader = new FileReader();
 
@@ -20,7 +19,7 @@ function Inputs({ socket, id, name, setMessages }) {
         type: "image",
         content: base64String,
         user: {
-          id: id,
+          id: socket.id,
           name: name,
         },
       };
@@ -44,7 +43,7 @@ function Inputs({ socket, id, name, setMessages }) {
         type: input.startsWith("http") ? "link" : "text",
         content: input,
         user: {
-          id: id,
+          id: socket.id,
           name: name,
         },
       };

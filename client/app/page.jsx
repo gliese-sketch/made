@@ -24,13 +24,8 @@ export default function Home() {
         {user ? (
           <div className="bg-violet-200 min-h-screen">
             <div className="container mx-auto relative min-h-screen p-4">
-              <Messages />
-              <Inputs
-                socket={socket}
-                id={socket.id}
-                name={user}
-                setMessages={setMessages}
-              />
+              <Messages messages={messages} id={socket.id} />
+              <Inputs socket={socket} name={user} setMessages={setMessages} />
             </div>
           </div>
         ) : (
