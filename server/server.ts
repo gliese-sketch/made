@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const server = http.createServer(app);
 
-const URL = `https://api.cloudflare.com/client/v4/accounts/${process.env.ACCOUNT_ID}/ai/run/@cf/deepseek-ai/deepseek-r1-distill-qwen-32b`;
+const URL = `https://api.cloudflare.com/client/v4/accounts/${process.env.ACCOUNT_ID}/ai/run/@cf/meta/llama-3.1-8b-instruct-fast`;
 
 app.get("/", (req, res) => {
   res.send("Socket.io server is healthy!");
@@ -32,7 +32,7 @@ io.on("connection", (socket) => {
       socket.broadcast.emit("new_message", data); // Send the ai prompt message
 
       const query = {
-        prompt: data.content.replaceAll("@ai"),
+        prompt: data.content.replaceAll("@ai", ""),
       };
 
       const options = {
