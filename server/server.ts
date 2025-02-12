@@ -3,12 +3,12 @@ import express from "express";
 import axios from "axios";
 import { Server } from "socket.io";
 
-const PORT = 8000;
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 const server = http.createServer(app);
 
-const URL = "https://api.wakati.tech/ai";
+const URL = `https://api.cloudflare.com/client/v4/accounts/${process.env.ACCOUNT_ID}/ai/run/@cf/deepseek-ai/deepseek-r1-distill-qwen-32b`;
 
 app.get("/", (req, res) => {
   res.send("Socket.io server is healthy!");
@@ -38,14 +38,18 @@ io.on("connection", (socket) => {
       const options = {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.TOKEN}`,
         },
       };
 
       const response = await axios.post(URL, query, options);
+
+      console.log(response);
+
       const newMessage = {
         ...data,
         type: "ai",
-        content: response.data.res.response,
+        content: response.data.result.response,
       };
 
       io.emit("new_message", newMessage); // Send the ai response back
