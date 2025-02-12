@@ -31,9 +31,16 @@ export default function Home() {
   useEffect(() => {
     socket.on("user_typing", (data) => {
       setTyping((prevState) => {
-        if (!prevState.some((obj) => obj.name === data.name)) {
+        const includes = prevState.some((obj) => obj.name === data.name);
+
+        // If name is not there and is typing
+        if (!includes && data.status === true) {
           return [...prevState, data];
+        } else if (data.status === false) {
+          // If not typing anymore
+          return prevState.filter((obj) => obj.name !== data.name);
         } else {
+          // Otherwise
           return prevState;
         }
       });
