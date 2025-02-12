@@ -55,6 +55,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("typing", (data) => {
+    console.log(data);
     socket.broadcast.emit("user_typing", data);
   });
 });

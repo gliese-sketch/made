@@ -11,6 +11,7 @@ const socket = io(
 export default function Home() {
   const [user, setUser] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [typing, setTyping] = useState([]);
 
   useEffect(() => {
     socket.on("new_message", (msg) => {
@@ -27,12 +28,24 @@ export default function Home() {
     });
   }, []);
 
+  useEffect(() => {
+    socket.on("user_typing", (data) => {
+      setTyping((prevState) => {
+        if (!prevState.some((obj) => obj.name === data.name)) {
+          return [...prevState, data];
+        } else {
+          return prevState;
+        }
+      });
+    });
+  }, []);
+
   return (
     <HeroUIProvider>
       <div className="min-h-screen max-h-screen bg-gradient-to-r from-[#fbed96] to-[#abecd6]">
         {user ? (
           <div className="container mx-auto relative min-h-screen p-4">
-            <Messages messages={messages} id={socket.id} />
+            <Messages messages={messages} id={socket.id} typing={typing} />
             <Inputs socket={socket} name={user} setMessages={setMessages} />
           </div>
         ) : (
